@@ -11,12 +11,19 @@ RUN gpg --export --armor 3FF5FFCAD71472C4 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get install -y qgis-server nginx fcgiwrap vim --force-yes 
+RUN apt-get install -y qgis-server apache2 libapache2-mod-fcgid vim --force-yes 
 
-ADD nginx/conf  /etc/nginx
-# Expose ports
+RUN a2enmod fcgid;
+
+# Remove the default mod_fcgid configuration file
+RUN rm -v /etc/apache2/mods-enabled/fcgid.conf
+# Copy a configuration file from the current directory
+ADD apache/fcgid.conf /etc/apache2/mods-enabled/fcgid.conf
+# Open port 80 & mount /home 
 EXPOSE 80
 
-# Define default command.
-#CMD ["nginx", "-g", "daemon off;"]
-CMD spawn-fcgi -s /var/run/fcgiwrap.sock /usr/sbin/fcgiwrap && nginx -g "daemon off;"
+#add start.sh on first install, generate config file: ~/lizmap/var
+ADD /apache/start.sh media/start.sh
+RUN chmod 0755 /media/start.sh
+# Now launch apache in the foreground
+CMD /media/start.sh
