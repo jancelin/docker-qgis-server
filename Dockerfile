@@ -16,12 +16,14 @@ RUN apt-get install -y qgis-server libapache2-mod-fcgid vim --force-yes
 RUN a2enmod fcgid; a2enconf serve-cgi-bin
 
 # Remove the default mod_fcgid configuration file
-RUN rm -v /etc/apache2/mods-enabled/fcgid.conf
+#RUN rm -v /etc/apache2/mods-enabled/fcgid.conf
 # Copy a configuration file from the current directory
-ADD fcgid.conf /etc/apache2/mods-enabled/fcgid.conf
+#ADD apache/fcgid.conf /etc/apache2/mods-enabled/fcgid.conf
 # Open port 80 & mount /home 
 EXPOSE 80
 
-# Define default command.
-#CMD ["nginx", "-g", "daemon off;"]
-CMD spawn-fcgi -s /var/run/fcgiwrap.sock /usr/sbin/fcgiwrap && nginx -g "daemon off;"
+#add start.sh on first install, generate config file: ~/lizmap/var
+ADD start.sh /apache/start.sh
+RUN chmod 0755 /apache/start.sh
+# Now launch apache in the foreground
+CMD /apache/start.sh
