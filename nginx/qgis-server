@@ -1,4 +1,9 @@
-# Nginx config for qgis-server
+#-----------------------------------
+# THIS FILE IS INSTALLED BY LIZMAP 
+# ALL CHANGES WILL BE LOST
+#-----------------------------------
+
+# Nginx config far qgis-mapserver
 server {
     listen 8200;
     server_name qgis;
@@ -13,9 +18,8 @@ server {
     real_ip_header X-Forwarded-For;
     real_ip_recursive on;
 
-    location /cgi-bin/ {
-        fastcgi_pass unix:/var/run/fcgiwrap.socket;
-        include /etc/nginx/fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    location / {
+        fastcgi_pass unix:/tmp/qgis-server.sock; 
+        include fastcgi_params;
     }
 }
