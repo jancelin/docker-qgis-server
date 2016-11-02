@@ -12,8 +12,8 @@ RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
 RUN apt-get install -y qgis-server python-qgis --force-yes
-
-ADD a2enmod rewrite;
+RUN apt-get install -y apache2 libapache2-mod-fcgid --force-yes
+RUN a2enmod rewrite; a2enconf qgis-server-port;
 
 
 ADD start.sh /start.sh
