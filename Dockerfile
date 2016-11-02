@@ -11,15 +11,8 @@ RUN gpg --export --armor 3FF5FFCAD71472C4 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get install -y qgis-server nginx php5-fpm --force-yes
+RUN apt-get install -y qgis-server python-qgis --force-yes
 
-ADD nginx/*  /etc/nginx/sites-enabled/
+ADD a2enmod rewrite;
 
-# Tweak php-fpm configuration
-RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 
-# Expose ports
-EXPOSE 80
-
-# Run supervisor
-CMD nginx -g "daemon off;"
