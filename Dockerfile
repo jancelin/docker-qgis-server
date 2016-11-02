@@ -23,7 +23,7 @@ RUN a2enmod fcgid;
 EXPOSE 80
 
 #add start.sh on first install, generate config file: ~/lizmap/var
-ADD start.sh /apache/start.sh
-RUN chmod 0755 /apache/start.sh
+ADD /apache/start.sh media/start.sh
+RUN chmod 0755 /media/start.sh
 # Now launch apache in the foreground
-CMD /apache/start.sh
+CMD /media/start.sh
