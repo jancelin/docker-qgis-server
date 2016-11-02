@@ -11,11 +11,7 @@ RUN gpg --export --armor 3FF5FFCAD71472C4 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get install -y qgis-server nginx supervisor php5-fpm php5-curl php5-cli php5-sqlite \
-    php5-pgsql php5-gd php5-ldap --force-yes
-
-ADD supervisor/supervisord.conf /etc/supervisor/supervisord.conf
-ADD supervisor/php.conf supervisor/nginx.conf supervisor/qgis.conf /etc/supervisor/conf.d/ 
+RUN apt-get install -y qgis-server nginx php5-fpm --force-yes
 
 ADD nginx/*  /etc/nginx/sites-enabled/
 
@@ -23,7 +19,7 @@ ADD nginx/*  /etc/nginx/sites-enabled/
 RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 
 # Expose ports
-EXPOSE 80 8200
+EXPOSE 80
 
 # Run supervisor
-CMD supervisord
+CMD nginx -g "daemon off;"
