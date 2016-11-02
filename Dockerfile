@@ -11,12 +11,19 @@ RUN gpg --export --armor 3FF5FFCAD71472C4 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get install -y qgis-server nginx vim --force-yes && \
+RUN apt-get install -y qgis-server nginx supervisor vim --force-yes && \
   echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
   chown -R www-data:www-data /var/lib/nginx
+  
+ADD supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+ADD supervisor/nginx.conf supervisor/qgis.conf /etc/supervisor/conf.d/   
+  
 ADD nginx/*  /etc/nginx/sites-enabled/
 # Expose ports
 EXPOSE 8200
+# Run supervisor
+CMD supervisord
+
 # Define default command.
-CMD ["/usr/sbin/nginx"]
+#CMD ["/usr/sbin/nginx"]
 
