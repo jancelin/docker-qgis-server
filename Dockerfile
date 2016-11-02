@@ -11,19 +11,13 @@ RUN gpg --export --armor 3FF5FFCAD71472C4 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get install -y qgis-server python-qgis --force-yes
-RUN apt-get install -y apache2 libapache2-mod-fcgid --force-yes
-#RUN a2enmod rewrite
-#RUN echo "Listen 80" >> /etc/apache2/conf-available/qgis-server-port.conf
-#RUN a2enconf qgis-server-port
+RUN apt-get install -y qgis-server python-qgis apache2 libapache2-mod-fcgid --force-yes
 ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
 #Setting up Apache
 RUN export LC_ALL="C" && a2enmod fcgid && a2enconf serve-cgi-bin
 RUN a2dissite 000-default
 RUN a2ensite 001-qgis-server
+EXPOSE 80
 ADD start.sh /start.sh
 RUN chmod +x /start.sh
-EXPOSE 80
 CMD /start.sh
-
-
