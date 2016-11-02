@@ -16,3 +16,7 @@ RUN apt-get install -y qgis-server python-qgis --force-yes
 ADD a2enmod rewrite;
 
 
+ADD start.sh /start.sh
+RUN chmod 0755 /start.sh
+# Now launch apache in the foreground
+CMD /start.sh
