@@ -1,6 +1,6 @@
 # Nginx config for qgis-server
 server {
-    listen 8200;
+    listen 127.0.0.1:8200;
     server_name qgis;
 
     access_log /var/log/nginx/qgis.access.log;
