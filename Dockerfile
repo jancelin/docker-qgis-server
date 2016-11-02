@@ -20,4 +20,4 @@ EXPOSE 8200
 
 # Define default command.
 #CMD ["nginx", "-g", "daemon off;"]
-CMD spawn-fcgi -s /var/run/fcgiwrap.sock /usr/sbin/fcgiwrap && nginx
+CMD spawn-fcgi -s /var/run/fcgiwrap.sock /usr/sbin/fcgiwrap && nginx -g "daemon off;"
