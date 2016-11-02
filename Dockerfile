@@ -12,4 +12,6 @@ RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
 RUN apt-get install -y qgis-server unzip nginx --force-yes
-
+ADD nginx/*  /etc/nginx/sites-enabled/
+# Expose ports
+EXPOSE 80
