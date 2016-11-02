@@ -16,9 +16,9 @@ RUN apt-get install -y qgis-server apache2 libapache2-mod-fcgid vim --force-yes
 RUN a2enmod fcgid;
 
 # Remove the default mod_fcgid configuration file
-#RUN rm -v /etc/apache2/mods-enabled/fcgid.conf
+RUN rm -v /etc/apache2/mods-enabled/fcgid.conf
 # Copy a configuration file from the current directory
-#ADD apache/fcgid.conf /etc/apache2/mods-enabled/fcgid.conf
+ADD apache/fcgid.conf /etc/apache2/mods-enabled/fcgid.conf
 # Open port 80 & mount /home 
 EXPOSE 80
 
