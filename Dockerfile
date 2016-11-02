@@ -11,12 +11,13 @@ RUN gpg --export --armor 3FF5FFCAD71472C4 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get install -y qgis-server nginx  vim --force-yes
+RUN apt-get install -y qgis-server ngnix fcgiwrap vim --force-yes && \
+    sed -i 's/^\(user .*\)$/user root;/' /etc/nginx/nginx.conf
 
 ADD nginx/*  /etc/nginx/sites-enabled/
 # Expose ports
 EXPOSE 8200
 
 # Define default command.
-CMD ["nginx", "-g", "daemon off;"]
-
+#CMD ["nginx", "-g", "daemon off;"]
+CMD spawn-fcgi -s /var/run/fcgiwrap.sock /usr/sbin/fcgiwrap && nginx
