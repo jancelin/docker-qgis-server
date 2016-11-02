@@ -18,12 +18,6 @@ RUN echo "Listen 80" >> /etc/apache2/conf-available/qgis-server-port.conf
 RUN a2enconf qgis-server-port
 ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
 RUN a2ensite 001-qgis-server
-
-#RUN cat /etc/apache2/conf-available/qgis-server-port.conf
-#RUN a2enconf qgis-server-port
 EXPOSE 80
+CMD apachectl -D FOREGROUND
 
-ADD start.sh /start.sh
-RUN chmod 0755 /start.sh
-# Now launch apache in the foreground
-CMD /start.sh
