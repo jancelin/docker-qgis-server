@@ -1,6 +1,10 @@
-#!/bin/bash
+#!/bin/sh
+set -e
 
 # Apache gets grumpy about PID files pre-existing
-rm -f /var/run/apache2/apache2.pid
+rm -f /usr/local/apache2/logs/httpd.pid
 
-exec /usr/sbin/apachectl -D FOREGROUND
+service apache2 restart
+
+# avoid containers closing and keep it open
+tail -f /dev/null
