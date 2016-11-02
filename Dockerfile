@@ -13,7 +13,7 @@ RUN apt-get -y update
 # Install stuff
 RUN apt-get install -y qgis-server libapache2-mod-fcgid vim --force-yes 
 
-RUN a2enmod fcgid; a2enconf serve-cgi-bin
+RUN a2enmod fcgid
 
 # Remove the default mod_fcgid configuration file
 #RUN rm -v /etc/apache2/mods-enabled/fcgid.conf
