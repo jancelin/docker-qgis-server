@@ -18,5 +18,5 @@ ADD nginx/*  /etc/nginx/sites-enabled/
 # Expose ports
 EXPOSE 8200
 # Define default command.
-CMD ["nginx"]
+CMD ["/usr/sbin/nginx"]
 
