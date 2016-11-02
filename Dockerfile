@@ -11,7 +11,12 @@ RUN gpg --export --armor 3FF5FFCAD71472C4 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get install -y qgis-server unzip nginx --force-yes
+RUN apt-get install -y qgis-server unzip nginx --force-yes && \
+  echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
+  chown -R www-data:www-data /var/lib/nginx
 ADD nginx/*  /etc/nginx/sites-enabled/
 # Expose ports
-EXPOSE 80
+EXPOSE 8200
+# Define default command.
+CMD ["nginx"]
+
