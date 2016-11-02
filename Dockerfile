@@ -11,10 +11,15 @@ RUN gpg --export --armor 3FF5FFCAD71472C4 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get install -y qgis-server nginx fcgiwrap vim --force-yes 
+RUN apt-get install -y qgis-server libapache2-mod-fcgid vim --force-yes 
 
-ADD nginx/conf  /etc/nginx
-# Expose ports
+RUN a2enmod fcgid; a2enconf serve-cgi-bin
+
+# Remove the default mod_fcgid configuration file
+RUN rm -v /etc/apache2/mods-enabled/fcgid.conf
+# Copy a configuration file from the current directory
+ADD fcgid.conf /etc/apache2/mods-enabled/fcgid.conf
+# Open port 80 & mount /home 
 EXPOSE 80
 
 # Define default command.
