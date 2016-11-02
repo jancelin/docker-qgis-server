@@ -11,7 +11,7 @@ RUN gpg --export --armor 3FF5FFCAD71472C4 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get install -y qgis-server libapache2-mod-fcgid vim --force-yes 
+RUN apt-get install -y qgis-server apache2 libapache2-mod-fcgid vim --force-yes 
 
 RUN a2enmod fcgid;
 
