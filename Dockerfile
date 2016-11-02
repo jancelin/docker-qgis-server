@@ -11,12 +11,19 @@ RUN gpg --export --armor 3FF5FFCAD71472C4 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get install -y qgis-server nginx fcgiwrap vim --force-yes 
+RUN apt-get install -y qgis-server nginx supervisor php5-fpm php5-curl php5-cli php5-sqlite \
+    php5-pgsql php5-gd php5-ldap --force-yes
 
-ADD nginx/conf  /etc/nginx
+ADD supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+ADD supervisor/php.conf supervisor/nginx.conf supervisor/qgis.conf /etc/supervisor/conf.d/ 
+
+ADD nginx/*  /etc/nginx/sites-enabled/
+
+# Tweak php-fpm configuration
+RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
+
 # Expose ports
-EXPOSE 80
+EXPOSE 80 8200
 
-# Define default command.
-#CMD ["nginx", "-g", "daemon off;"]
-CMD spawn-fcgi -s /var/run/fcgiwrap.sock /usr/sbin/fcgiwrap && nginx -g "daemon off;"
+# Run supervisor
+CMD supervisord
