@@ -1,4 +1,4 @@
-# Nginx config far qgis-mapserver
+# Nginx config for qgis-server
 server {
     listen 8200;
     server_name qgis;
