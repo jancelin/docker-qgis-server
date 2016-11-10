@@ -10,14 +10,15 @@ services:
   lb:
     image: dockercloud/haproxy
     links:
-      - qgis
+      - qgiserver
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - MONITOR_PORT
     ports:
       - 8900:80
-  qgis:
+      
+  qgiserver:
     image: jancelin/qgis-server:2.14LTR
     restart: always
     volumes:
