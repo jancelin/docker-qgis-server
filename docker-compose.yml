@@ -16,4 +16,4 @@ services:
     volumes:
       - "/home/qgis_files:/home"
     expose:
-      - 8900
+      - 80
