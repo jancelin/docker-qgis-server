@@ -6,6 +6,8 @@ services:
       - qgis
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - MONITOR_PORT
     ports:
       - 8900:80
   qgis:
