@@ -17,7 +17,7 @@ ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
 RUN export LC_ALL="C" && a2enmod fcgid && a2enconf serve-cgi-bin
 RUN a2dissite 000-default
 RUN a2ensite 001-qgis-server
-EXPOSE 8900
+EXPOSE 80
 ADD start.sh /start.sh
 RUN chmod +x /start.sh
 CMD /start.sh
