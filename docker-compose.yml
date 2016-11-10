@@ -1,0 +1,19 @@
+version: '2'
+services:
+  lb:
+    image: dockercloud/haproxy
+    links:
+      - qgis
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - MONITOR_PORT
+    ports:
+      - 8900:80
+  qgis:
+    image: jancelin/qgis-server:2.14LTR
+    restart: always
+    volumes:
+      - "/home/qgis_files:/home"
+    expose:
+      - 80
