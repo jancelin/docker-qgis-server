@@ -17,6 +17,7 @@ services:
      - qgiserver1
     ports:
      - "8900:80" 
+     - "70:70"
      
   qgiserver:
     image: jancelin/geopoppy:qgis-server2.14LTR
