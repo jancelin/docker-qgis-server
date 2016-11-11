@@ -35,33 +35,55 @@ services:
       - 80
 ```
 
+* HAProxy needs a configuration file that is mapped into the container. Create a file haproxy/haproxy.cfg with the following content.
+
+```
+global
+  log 127.0.0.1 local0
+  log 127.0.0.1 local1 notice
+
+defaults
+  log global
+  mode http
+  option httplog
+  option dontlognull
+  timeout connect 5000
+  timeout client 10000
+  timeout server 10000
+
+listen stats :70
+  stats enable
+  stats uri /
+
+frontend balancer
+  bind 0.0.0.0:80
+  mode http
+  default_backend aj_backends
+
+backend aj_backends
+  mode http
+  option forwardfor
+  # http-request set-header X-Forwarded-Port %[dst_port]
+  balance roundrobin
+  server qgiserver qgiserver:80 check
+  server qgiserver1 qgiserver1:80 check
+  # option httpchk OPTIONS * HTTP/1.1\r\nHost:\ localhost
+  option httpchk GET /
+  http-check expect status 200
+```
+
 * up
 
 ```
-docker-compose up -d lb
-```
-
-* scale (ex:15 qgis-sever)
-
-```
-docker-compose scale qgiserver=15
+docker-compose up -d 
 ```
 
 * Test if qgis-server working
 
-> http://localhost:8900/cgi-bin/qgis_mapserv.fcgi?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities
+> http://172.24.1.1:8900/cgi-bin/qgis_mapserv.fcgi?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities
 
 * Enjoy
 
-* show statistics:
-
-http://internal_lb_ip:1936
-
->ex: http://172.18.0.2:1936
-
-> login: stats
-
-> password: stats
 
 
 
