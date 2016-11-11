@@ -7,22 +7,30 @@ run 1 or more qgis server with load balancing
 ```
 version: '2'
 services:
-  lb:
-    image: dockercloud/haproxy
-    links:
-      - qgiserver
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - MONITOR_PORT
-    ports:
-      - 8900:80
-      
-  qgiserver:
-    image: jancelin/qgis-server:2.14LTR
+  haproxy:
+    image: hypriot/rpi-haproxy
     restart: always
     volumes:
-      - "/home/qgis_files:/home"
+     - /home/pirate/haproxy:/haproxy-override
+    links:
+     - qgiserver
+     - qgiserver1
+    ports:
+     - "8900:80" 
+     
+  qgiserver:
+    image: jancelin/geopoppy:qgis-server2.14LTR
+    restart: always
+    volumes:
+      - "/home/GeoPoppy/lizmap/project:/home"
+    expose:
+      - 80 
+      
+  qgiserver1:
+    image: jancelin/geopoppy:qgis-server2.14LTR
+    restart: always
+    volumes:
+      - "/home/GeoPoppy/lizmap/project:/home"
     expose:
       - 80
 ```
