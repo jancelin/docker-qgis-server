@@ -83,6 +83,10 @@ docker-compose up -d
 
 > http://172.24.1.1:8900/cgi-bin/qgis_mapserv.fcgi?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities
 
+* stats
+
+http://172.24.1.1:70
+
 * Enjoy
 
 
