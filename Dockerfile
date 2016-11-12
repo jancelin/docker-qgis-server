@@ -11,7 +11,7 @@ RUN gpg -a --export 7638D0442B90D010 | sudo apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN mv /var/lib/dpkg/info/libc6.* /tmp/
+#RUN mv /var/lib/dpkg/info/libc6.* /tmp/
 RUN dpkg --remove --force-remove-reinstreq libc6
 RUN apt-get remove libc6
 RUN apt-get autoremove && sudo apt-get autoclean
