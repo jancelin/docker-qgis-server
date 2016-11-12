@@ -8,6 +8,7 @@ RUN  dpkg-divert --local --rename --add /sbin/initctl
 RUN echo "deb    http://http.debian.net/debian sid main " >> /etc/apt/sources.list
 RUN gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010
 RUN gpg -a --export 7638D0442B90D010 | sudo apt-key add -
+RUN dpkg --clear-avail
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
