@@ -11,10 +11,8 @@ RUN gpg -a --export 7638D0442B90D010 | sudo apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get -y upgrade 
-RUN apt-get -y dist-upgrade --force-yes --fix-missing
-RUN apt-get -t sid install -y libc6=2.24-5 --force-yes --fix-missing
-RUN apt-get -t sid install -y qgis-server apache2 libapache2-mod-fcgid --force-yes --fix-missing
+
+RUN apt-get -t sid install -y libc6=2.19-18+deb8u6 qgis-server apache2 libapache2-mod-fcgid --force-yes --fix-missing
 ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
 #Setting up Apache
 RUN export LC_ALL="C" && a2enmod fcgid && a2enconf serve-cgi-bin
