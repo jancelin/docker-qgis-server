@@ -17,7 +17,7 @@ RUN apt-get  -y update
 #RUN apt-get clean -y
 RUN  apt-get -f install -y apache2 libapache2-mod-fcgid --force-yes --fix-missing
 #--force-yes --fix-missing
-RUN  apt-get -t jessie-backports -f install -y qgis-server --force-yes --fix-missing
+RUN  apt-get -t jessie-backports -f install -y qgis-server --force-yes
 #--force-yes --fix-missing
 ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
 #Setting up Apache
