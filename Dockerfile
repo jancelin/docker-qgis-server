@@ -15,7 +15,7 @@ RUN apt-get  -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
 #RUN apt-get clean -y
-RUN apt-get remove -y libc6 
+RUN apt-get -y remove libc6 
 RUN  apt-get -t sid -f install -y apache2 libapache2-mod-fcgid --force-yes --fix-missing
 #--force-yes --fix-missing
 RUN  apt-get -t sid -f install -y qgis-server --force-yes --fix-missing
