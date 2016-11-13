@@ -16,8 +16,10 @@ RUN apt-get  -y update
 # Install stuff
 #RUN apt-get clean -y
 RUN apt-get -t sid -f install -y apt-utils --force-yes --fix-missing
-RUN apt-get -t sid -f install -y apache2 libapache2-mod-fcgid --force-yes --fix-missing
-RUN apt-get -t sid -f install -y qgis-server  --force-yes --fix-missing
+RUN apt-get -t sid -f install -y apache2 libapache2-mod-fcgid 
+#--force-yes --fix-missing
+RUN apt-get -t sid -f install -y qgis-server 
+#--force-yes --fix-missing
 ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
 #Setting up Apache
 RUN export LC_ALL="C" && a2enmod fcgid && a2enconf serve-cgi-bin
