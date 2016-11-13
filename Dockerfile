@@ -5,10 +5,13 @@ RUN  export DEBIAN_FRONTEND=noninteractive
 ENV  DEBIAN_FRONTEND noninteractive
 RUN  dpkg-divert --local --rename --add /sbin/initctl
 # add sid to sources.list
+MAINTAINER 1
 RUN echo "deb    http://http.debian.net/debian sid main " >> /etc/apt/sources.list
 RUN gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010
 RUN gpg -a --export 7638D0442B90D010 | sudo apt-key add -
-MAINTAINER 1
+RUN echo "deb    http://http.debian.net/debian sid main " >> /etc/apt/sources.list
+RUN gpg --keyserver pgpkeys.mit.edu --recv-key 8B48AD6246925553
+RUN gpg -a --export 8B48AD6246925553 | sudo apt-key add -
 RUN apt-get  -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
