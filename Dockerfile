@@ -17,6 +17,12 @@ RUN apt-get  -y update
 #RUN apt-get clean -y
 RUN  apt-get -f install -y apache2 libapache2-mod-fcgid --force-yes --fix-missing
 #--force-yes --fix-missing
+RUN echo "deb http://qgis.org/debian-ltr jessie main " >> /etc/apt/sources.list
+RUN wget -O - http://qgis.org/downloads/qgis-2016.gpg.key | gpg --import
+RUN gpg --fingerprint 073D307A618E5811
+RUN gpg -a --export --armor 073D307A618E5811 | sudo apt-key add -
+RUN apt-get -y update
+
 RUN  apt-get -f install -y qgis-server --force-yes --fix-missing
 #--force-yes --fix-missing
 ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
