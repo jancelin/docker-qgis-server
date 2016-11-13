@@ -6,7 +6,7 @@ ENV  DEBIAN_FRONTEND noninteractive
 RUN  dpkg-divert --local --rename --add /sbin/initctl
 # add sid to sources.list
 MAINTAINER 1
-RUN echo "deb    http://http.debian.net/debian jessie-backports main " >> /etc/apt/sources.list
+RUN echo "deb    http://http.debian.net/debian stretch  main " >> /etc/apt/sources.list
 RUN gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010
 RUN gpg -a --export 7638D0442B90D010 | sudo apt-key add -
 RUN gpg --keyserver pgpkeys.mit.edu --recv-key 8B48AD6246925553
@@ -17,7 +17,7 @@ RUN apt-get  -y update
 #RUN apt-get clean -y
 RUN  apt-get -f install -y apache2 libapache2-mod-fcgid --force-yes --fix-missing
 #--force-yes --fix-missing
-RUN  apt-get -t jessie-backports -f install -y qgis-server --force-yes
+RUN  apt-get -t stretch  -f install -y qgis-server --force-yes
 #--force-yes --fix-missing
 ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
 #Setting up Apache
