@@ -6,18 +6,18 @@ ENV  DEBIAN_FRONTEND noninteractive
 RUN  dpkg-divert --local --rename --add /sbin/initctl
 # add sid to sources.list
 MAINTAINER 1
-RUN echo "deb    http://http.debian.net/debian sid main " >> /etc/apt/sources.list
-RUN gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010
-RUN gpg -a --export 7638D0442B90D010 | sudo apt-key add -
-RUN gpg --keyserver pgpkeys.mit.edu --recv-key 8B48AD6246925553
-RUN gpg -a --export 8B48AD6246925553 | sudo apt-key add -
+#RUN echo "deb    http://http.debian.net/debian sid main " >> /etc/apt/sources.list
+#RUN gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010
+#RUN gpg -a --export 7638D0442B90D010 | sudo apt-key add -
+#RUN gpg --keyserver pgpkeys.mit.edu --recv-key 8B48AD6246925553
+#RUN gpg -a --export 8B48AD6246925553 | sudo apt-key add -
 RUN apt-get  -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
 #RUN apt-get clean -y
 RUN  apt-get -f install -y apache2 libapache2-mod-fcgid --force-yes --fix-missing
 #--force-yes --fix-missing
-RUN  apt-get -t sid -f install -y qgis-server --force-yes --fix-missing
+RUN  apt-get -f install -y qgis-server --force-yes --fix-missing
 #--force-yes --fix-missing
 ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
 #Setting up Apache
