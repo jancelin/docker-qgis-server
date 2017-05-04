@@ -1,16 +1,16 @@
 #--------- Generic stuff all our Dockerfiles should start with so we get caching ------------
-FROM resin/rpi-raspbian:jessie
+FROM resin/rpi-raspbian
 MAINTAINER julien ANCELIN rpi_docker-qgis-server
 RUN  export DEBIAN_FRONTEND=noninteractive
 ENV  DEBIAN_FRONTEND noninteractive
 RUN  dpkg-divert --local --rename --add /sbin/initctl
 # add sid to sources.list
-RUN echo "deb    http://http.debian.net/debian jessie-backports  main " >> /etc/apt/sources.list
-RUN gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010
-RUN gpg -a --export 7638D0442B90D010 | sudo apt-key add -
-RUN gpg --keyserver pgpkeys.mit.edu --recv-key 8B48AD6246925553
-RUN gpg -a --export 8B48AD6246925553 | sudo apt-key add -
-RUN apt-get  -y update
+RUN echo "deb    http://http.debian.net/debian jessie-backports  main " >> /etc/apt/sources.list \
+    && gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010 \
+    && gpg -a --export 7638D0442B90D010 | sudo apt-key add - \
+    && gpg --keyserver pgpkeys.mit.edu --recv-key 8B48AD6246925553 \
+    && gpg -a --export 8B48AD6246925553 | sudo apt-key add - \
+    && apt-get  -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
 #RUN apt-get clean -y
