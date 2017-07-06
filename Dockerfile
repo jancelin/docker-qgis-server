@@ -15,7 +15,7 @@ RUN apt-get install -y qgis-server python-qgis apache2 libapache2-mod-fcgid unzi
 #Install wfsOutputExtension plugin
 RUN mkdir -p /opt/qgis-server && mkdir -p /opt/qgis-server/plugins
 ADD https://github.com/3liz/qgis-wfsOutputExtension/archive/master.zip /opt/qgis-server/plugins
-RUN unzip /opt/qgis-server/plugins/master.zip 
+RUN unzip /opt/qgis-server/plugins/master.zip -d /opt/qgis-server/plugins/
 RUN mv /opt/qgis-server/plugins/qgis-wfsOutputExtension-master /opt/qgis-server/plugins/wfsOutputExtension
 #virtual host
 ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
