@@ -1,5 +1,7 @@
 # docker-qgis-server
 
+{{< importPartial "https://raw.githubusercontent.com/jancelin/geo-poppy/master/collec/docker-compose.yml" >}}
+
 run 1 or more qgis server with load balancing
 
 * update your docker-compose.yml
