@@ -4,24 +4,24 @@
 Build
 -----
 
-*To build qgis-server with Docker on a PC,server
+* To build qgis-server with Docker on a PC,server
 
 ```
 docker build -t "qgiserver" https://github.com/jancelin/docker-qgis-server.git#2.14LTR-wfsOutputExtension:/ -f Dockerfile
 ```
 
-*To build qgis-server with Docker on a Raspberry Pi
+* To build qgis-server with Docker on a Raspberry Pi
 
 ```
 docker build -t "qgiserver" https://github.com/jancelin/docker-qgis-server.git#2.14LTR-wfsOutputExtension:/ -f Dockerfile.raspberry
 ```
 
-*Or use images on DockerHub and Docker-compose
+* Or use images on DockerHub and Docker-compose
 
 PC
 ---
 
-*Create a docker-compose.yml
+* Create a docker-compose.yml
 
 ```
 version: '2'
@@ -54,7 +54,7 @@ services:
 Raspberry
 ---------
 
-*Create a docker-compose.yml
+* Create a docker-compose.yml
 
 
 ```
@@ -83,15 +83,16 @@ services:
     expose:
       - 80
 
-``
+```
 
 ----------------------------------------
+
 Load Balancing demo
 -------------------
 
-run 1 or more qgis server with load balancing
+Run 1 or more qgis server with load balancing
 
-* update your docker-compose.yml
+* Update your docker-compose.yml
 
 ```
 version: '2'
