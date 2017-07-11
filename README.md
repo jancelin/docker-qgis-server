@@ -1,5 +1,46 @@
 # docker-qgis-server
 
+
+to build qgis-server with Docker on a Raspberry Pi
+
+```
+docker build  -t "jancelin/geopoppy:qgiserver-2.14LTR-wfsOutputExtension" https://github.com/jancelin/docker-qgis-server.git#rpi_2.14LTR-wfsOutputExtension:/
+```
+
+docker-compose.yml
+
+```
+version: '2'
+services:
+#---WEBSIG-------------------------------------
+  lizmap:
+    image: jancelin/geopoppy:lizmap-3.1.1
+    restart: always
+    ports:
+     - 80:80
+     - 443:443
+    volumes:
+     - /home/GeoPoppy/lizmap/project:/home
+     - /home/GeoPoppy/lizmap/project/var:/var/www/websig/lizmap/var
+     - /home/GeoPoppy/lizmap/project/tmp:/tmp
+    links:
+     - qgiserver:qgiserver
+##Change l'URL WMS in Lizmap back-office: http://qgiserver/cgi-bin/qgis_mapserv.fcgi
+
+  qgiserver:
+    image: jancelin/geopoppy:qgis-server2.14LTR-0.2
+    restart: always
+    volumes:
+      - /home/GeoPoppy/lizmap/project:/home
+    expose:
+      - 80
+
+```
+
+----------------------------------------
+Load Balancing demo
+-------------------
+
 run 1 or more qgis server with load balancing
 
 * update your docker-compose.yml
