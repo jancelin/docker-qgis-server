@@ -11,7 +11,7 @@ services:
     ports:
       - 8900:80
   qgis:
-    image: jancelin/qgis-server:2.14LTR
+    image: jancelin/qgis-server:2.14LTR-wfsOutputExtension
     restart: always
     volumes:
       - "/home/qgis_files:/home"
