@@ -1,8 +1,8 @@
 # docker-qgis-server
 
 
-Build
------
+Build image
+-----------
 
 * To build qgis-server with Docker on a PC,server
 
@@ -16,12 +16,40 @@ docker build -t "qgiserver" https://github.com/jancelin/docker-qgis-server.git#2
 docker build -t "qgiserver" https://github.com/jancelin/docker-qgis-server.git#2.14LTR-wfsOutputExtension:/ -f Dockerfile.raspberry
 ```
 
-* Or use images on DockerHub and Docker-compose
+Or Pull from DockerHub
+----------------------
 
-PC
----
+* PC
+```
+docker pull jancelin/qgis-server:2.14LTR-wfsOutputExtension
+```
 
+* Raspberry
+
+```
+docker pull jancelin/geopoppy:qgis-server2.14LTR-0.2
+```
+
+
+
+Play qgis server with docker-compose
+------------------------------------------
 * Create a docker-compose.yml
+
+```
+version: '2'
+services:
+  qgiserver:
+    image: jancelin/qgis-server:2.14LTR-wfsOutputExtension
+    restart: always
+    volumes:
+      - /home/lizmap/project:/home
+    ports:
+      - 80:80
+```
+
+
+* Create a docker-compose.yml with qgis server and lizmap for PC
 
 ```
 version: '2'
@@ -54,7 +82,7 @@ services:
 Raspberry
 ---------
 
-* Create a docker-compose.yml
+* Create a docker-compose.yml with qgis server and lizmap for raspberry
 
 
 ```
