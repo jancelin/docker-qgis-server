@@ -14,7 +14,7 @@ version: '2'
 services:
 #---WEBSIG-------------------------------------
   lizmap:
-    image: jancelin/geopoppy:lizmap-3.1.1
+    image: jancelin/docker-lizmap:3.1.1-0.1
     restart: always
     ports:
      - 80:80
