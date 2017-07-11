@@ -4,7 +4,7 @@
 to build qgis-server with Docker on a Raspberry Pi
 
 ```
-docker build  -t "jancelin/geopoppy:qgiserver-2.14LTR-wfsOutputExtension" https://github.com/jancelin/docker-qgis-server.git#rpi_2.14LTR-wfsOutputExtension:/
+docker build  -t "jancelin/qgis-server:2.14LTR-wfsOutputExtension" https://github.com/jancelin/docker-qgis-server.git#2.14LTR-wfsOutputExtension:/
 ```
 
 docker-compose.yml
@@ -28,7 +28,7 @@ services:
 ##Change l'URL WMS in Lizmap back-office: http://qgiserver/cgi-bin/qgis_mapserv.fcgi
 
   qgiserver:
-    image: jancelin/geopoppy:qgis-server2.14LTR-0.2
+    image: jancelin/qgis-server:2.14LTR-2.14LTR-wfsOutputExtension
     restart: always
     volumes:
       - /home/GeoPoppy/lizmap/project:/home
