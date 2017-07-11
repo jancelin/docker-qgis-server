@@ -49,69 +49,10 @@ services:
 ```
 
 
-* Create a docker-compose.yml with qgis server and lizmap for PC
+* Create a docker-compose.yml with qgis server and lizmap for PC or Raspberry Pi
 
-```
-version: '2'
-services:
-#---WEBSIG-------------------------------------
-  lizmap:
-    image: jancelin/docker-lizmap:3.1.1-0.1
-    restart: always
-    ports:
-     - 80:80
-     - 443:443
-    volumes:
-     - /home/lizmap/project:/home
-     - /home/lizmap/project/var:/var/www/websig/lizmap/var
-     - /home/lizmap/project/tmp:/tmp
-    links:
-     - qgiserver:qgiserver
-##Change l'URL WMS in Lizmap back-office: http://qgiserver/cgi-bin/qgis_mapserv.fcgi
+https://github.com/jancelin/docker-lizmap/blob/3.1.1-0.1/docker-compose.yml
 
-  qgiserver:
-    image: jancelin/qgis-server:2.14LTR-wfsOutputExtension
-    restart: always
-    volumes:
-      - /home/lizmap/project:/home
-    expose:
-      - 80
-
-```
-
-Raspberry
----------
-
-* Create a docker-compose.yml with qgis server and lizmap for raspberry
-
-
-```
-version: '2'
-services:
-#---WEBSIG-------------------------------------
-  lizmap:
-    image: jancelin/geopoppy:lizmap-3.1.1
-    restart: always
-    ports:
-     - 80:80
-     - 443:443
-    volumes:
-     - /home/lizmap/project:/home
-     - /home/lizmap/project/var:/var/www/websig/lizmap/var
-     - /home/lizmap/project/tmp:/tmp
-    links:
-     - qgiserver:qgiserver
-##Change l'URL WMS in Lizmap back-office: http://qgiserver/cgi-bin/qgis_mapserv.fcgi
-
-  qgiserver:
-    image: jancelin/geopoppy:qgis-server2.14LTR-0.2
-    restart: always
-    volumes:
-      - /home/lizmap/project:/home
-    expose:
-      - 80
-
-```
 
 ----------------------------------------
 
