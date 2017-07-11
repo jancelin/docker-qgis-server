@@ -1,13 +1,27 @@
 # docker-qgis-server
 
 
-to build qgis-server with Docker on a Raspberry Pi
+Build
+-----
+
+*To build qgis-server with Docker on a PC,server
 
 ```
-docker build  -t "jancelin/qgis-server:2.14LTR-wfsOutputExtension" https://github.com/jancelin/docker-qgis-server.git#2.14LTR-wfsOutputExtension:/
+docker build -t "qgiserver" https://github.com/jancelin/docker-qgis-server.git#2.14LTR-wfsOutputExtension:/ -f Dockerfile
 ```
 
-docker-compose.yml
+*To build qgis-server with Docker on a Raspberry Pi
+
+```
+docker build -t "qgiserver" https://github.com/jancelin/docker-qgis-server.git#2.14LTR-wfsOutputExtension:/ -f Dockerfile.raspberry
+```
+
+*Or use images on DockerHub and Docker-compose
+
+PC
+---
+
+*Create a docker-compose.yml
 
 ```
 version: '2'
@@ -28,7 +42,7 @@ services:
 ##Change l'URL WMS in Lizmap back-office: http://qgiserver/cgi-bin/qgis_mapserv.fcgi
 
   qgiserver:
-    image: jancelin/qgis-server:2.14LTR-2.14LTR-wfsOutputExtension
+    image: jancelin/qgis-server:2.14LTR-wfsOutputExtension
     restart: always
     volumes:
       - /home/lizmap/project:/home
@@ -36,6 +50,40 @@ services:
       - 80
 
 ```
+
+Raspberry
+---------
+
+*Create a docker-compose.yml
+
+
+```
+version: '2'
+services:
+#---WEBSIG-------------------------------------
+  lizmap:
+    image: jancelin/geopoppy:lizmap-3.1.1
+    restart: always
+    ports:
+     - 80:80
+     - 443:443
+    volumes:
+     - /home/lizmap/project:/home
+     - /home/lizmap/project/var:/var/www/websig/lizmap/var
+     - /home/lizmap/project/tmp:/tmp
+    links:
+     - qgiserver:qgiserver
+##Change l'URL WMS in Lizmap back-office: http://qgiserver/cgi-bin/qgis_mapserv.fcgi
+
+  qgiserver:
+    image: jancelin/geopoppy:qgis-server2.14LTR-0.2
+    restart: always
+    volumes:
+      - /home/lizmap/project:/home
+    expose:
+      - 80
+
+``
 
 ----------------------------------------
 Load Balancing demo
