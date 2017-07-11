@@ -20,9 +20,9 @@ services:
      - 80:80
      - 443:443
     volumes:
-     - /home/GeoPoppy/lizmap/project:/home
-     - /home/GeoPoppy/lizmap/project/var:/var/www/websig/lizmap/var
-     - /home/GeoPoppy/lizmap/project/tmp:/tmp
+     - /home/lizmap/project:/home
+     - /home/lizmap/project/var:/var/www/websig/lizmap/var
+     - /home/lizmap/project/tmp:/tmp
     links:
      - qgiserver:qgiserver
 ##Change l'URL WMS in Lizmap back-office: http://qgiserver/cgi-bin/qgis_mapserv.fcgi
@@ -31,7 +31,7 @@ services:
     image: jancelin/qgis-server:2.14LTR-2.14LTR-wfsOutputExtension
     restart: always
     volumes:
-      - /home/GeoPoppy/lizmap/project:/home
+      - /home/lizmap/project:/home
     expose:
       - 80
 
