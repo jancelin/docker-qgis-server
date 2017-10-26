@@ -5,9 +5,9 @@ RUN  export DEBIAN_FRONTEND=noninteractive
 ENV  DEBIAN_FRONTEND noninteractive
 RUN  dpkg-divert --local --rename --add /sbin/initctl
 # add qgis to sources.list
-RUN echo "deb http://qgis.org/debian-ltr jessie main" >> /etc/apt/sources.list
-RUN gpg --keyserver keyserver.ubuntu.com --recv 073D307A618E5811
-RUN gpg --export --armor 073D307A618E5811 | apt-key add -
+RUN echo "deb http://qgis.org/debian jessie main" >> /etc/apt/sources.list
+RUN gpg --keyserver keyserver.ubuntu.com --recv CAEB3DC3BDF7FB45
+RUN gpg --export --armor CAEB3DC3BDF7FB45 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
