@@ -4,6 +4,7 @@ MAINTAINER julien ANCELIN docker-qgis-server
 RUN  export DEBIAN_FRONTEND=noninteractive
 ENV  DEBIAN_FRONTEND noninteractive
 RUN  dpkg-divert --local --rename --add /sbin/initctl
+RUN apt-get -y update
 RUN apt-get install -y gnupg
 # add qgis to sources.list
 RUN echo "deb http://qgis.org/debian stretch main" >> /etc/apt/sources.list
