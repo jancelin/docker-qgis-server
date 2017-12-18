@@ -5,7 +5,7 @@ RUN  export DEBIAN_FRONTEND=noninteractive
 ENV  DEBIAN_FRONTEND noninteractive
 RUN  dpkg-divert --local --rename --add /sbin/initctl
 RUN apt-get -y update
-RUN apt-get install -y gnupg
+RUN apt-get install -y gnupg apt-transport-https ca-certificates
 # add qgis to sources.list
 RUN echo "deb http://qgis.org/debian stretch main" >> /etc/apt/sources.list
 RUN gpg --keyserver keyserver.ubuntu.com --recv CAEB3DC3BDF7FB45
