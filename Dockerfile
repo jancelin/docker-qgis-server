@@ -1,9 +1,10 @@
 #--------- Generic stuff all our Dockerfiles should start with so we get caching ------------
-FROM debian:stretch
+FROM debian:stretch-slim
 MAINTAINER julien ANCELIN docker-qgis-server
 RUN  export DEBIAN_FRONTEND=noninteractive
 ENV  DEBIAN_FRONTEND noninteractive
 RUN  dpkg-divert --local --rename --add /sbin/initctl
+RUN apt-get install -y gpg
 # add qgis to sources.list
 RUN echo "deb http://qgis.org/debian stretch main" >> /etc/apt/sources.list
 RUN gpg --keyserver keyserver.ubuntu.com --recv CAEB3DC3BDF7FB45
