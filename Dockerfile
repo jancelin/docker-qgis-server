@@ -27,9 +27,9 @@ RUN a2dissite 000-default
 RUN a2ensite 001-qgis-server
 EXPOSE 80
 #add srs
-ADD srs.db.zip usr/share/qgis/resources/srs.db.zip
-RUN rm -r usr/share/qgis/resources/srs.db
-RUN unzip usr/share/qgis/resources/srs.db.zip
+#ADD srs.db.zip usr/share/qgis/resources/srs.db.zip
+#RUN rm -r usr/share/qgis/resources/srs.db
+#RUN unzip usr/share/qgis/resources/srs.db.zip
 ADD start.sh /start.sh
 RUN chmod +x /start.sh
 CMD /start.sh
