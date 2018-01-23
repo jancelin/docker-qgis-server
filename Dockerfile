@@ -27,9 +27,10 @@ RUN a2dissite 000-default
 RUN a2ensite 001-qgis-server
 EXPOSE 80
 #add srs
-ADD srs.db.zip usr/share/qgis/resources/srs.db.zip
-RUN rm -r usr/share/qgis/resources/srs.db
-RUN unzip usr/share/qgis/resources/srs.db.zip
+RUN apt-get install -y wget
+RUN wget -P /usr/share/qgis/resources/ https://github.com/jancelin/docker-lizmap/files/99407/srs.db.zip
+RUN rm /usr/share/qgis/resources/srs.db
+RUN unzip /usr/share/qgis/resources/srs.db.zip
 
 ADD start.sh /start.sh
 RUN chmod +x /start.sh
