@@ -114,5 +114,9 @@ http://internal_lb_ip:1936
 
 > password: stats
 
-
-
+CORS enabled
+------------
+Cors are enabled by default with following headers
+- Access-Control-Allow-Origin "*"
+- Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+- Access-Control-Allow-Headers "authorization,cache-control,expires,pragma"
