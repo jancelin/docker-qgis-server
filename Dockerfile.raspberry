@@ -4,16 +4,16 @@ MAINTAINER julien ANCELIN rpi_docker-qgis-server
 RUN  export DEBIAN_FRONTEND=noninteractive
 ENV  DEBIAN_FRONTEND noninteractive
 RUN  dpkg-divert --local --rename --add /sbin/initctl
-# add sid to sources.list
+# add backport to sources.list
 RUN echo "deb    http://http.debian.net/debian stretch-backports  main " >> /etc/apt/sources.list \
-    && gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010 \
-    && gpg -a --export 7638D0442B90D010 | sudo apt-key add - \
-    && gpg --keyserver pgpkeys.mit.edu --recv-key 8B48AD6246925553 \
-    && gpg -a --export 8B48AD6246925553 | sudo apt-key add - \
+#    && gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010 \
+#    && gpg -a --export 7638D0442B90D010 | sudo apt-key add - \
+#    && gpg --keyserver pgpkeys.mit.edu --recv-key 8B48AD6246925553 \
+#    && gpg -a --export 8B48AD6246925553 | sudo apt-key add - \
     && apt-get  -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN  apt-get -t stretch-backports  -f install -y qgis-server python-qgis-common python-qgis apache2 libapache2-mod-fcgid unzip --force-yes
+RUN  apt-get -t stretch-backports  -f install -y qgis-server python-qgis apache2 libapache2-mod-fcgid unzip --force-yes
 RUN apt-get -f install -y apache2 libapache2-mod-fcgid unzip --force-yes --fix-missing
 RUN apt-get clean && apt-get -y autoremove
 #Install wfsOutputExtension plugin
