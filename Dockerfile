@@ -7,7 +7,7 @@ RUN  dpkg-divert --local --rename --add /sbin/initctl
 RUN apt-get -y update
 RUN apt-get install -y gnupg apt-transport-https ca-certificates
 # add qgis to sources.list
-RUN echo "deb http://qgis.org/debian-ltr strech main" >> /etc/apt/sources.list
+RUN echo "deb http://qgis.org/debian-ltr stretch main" >> /etc/apt/sources.list
 RUN gpg --keyserver keyserver.ubuntu.com --recv 073D307A618E5811
 RUN gpg --export --armor 073D307A618E5811 | apt-key add -
 RUN apt --fix-broken install 
