@@ -5,7 +5,7 @@ RUN  export DEBIAN_FRONTEND=noninteractive
 ENV  DEBIAN_FRONTEND noninteractive
 RUN  dpkg-divert --local --rename --add /sbin/initctl
 RUN apt-get -y update
-RUN apt-get install -y gnupg apt-transport-https ca-certificates build-dep build-essential
+RUN apt-get install -y gnupg apt-transport-https ca-certificates build-essential
 # add qgis to sources.list
 RUN echo "deb http://qgis.org/debian-ltr jessie main" >> /etc/apt/sources.list
 RUN gpg --keyserver keyserver.ubuntu.com --recv 073D307A618E5811
