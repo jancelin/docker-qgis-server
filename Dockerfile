@@ -10,10 +10,10 @@ RUN apt-get install -y gnupg apt-transport-https ca-certificates
 RUN echo "deb http://qgis.org/debian-ltr jessie main" >> /etc/apt/sources.list
 RUN gpg --keyserver keyserver.ubuntu.com --recv 073D307A618E5811
 RUN gpg --export --armor 073D307A618E5811 | apt-key add -
+RUN apt --fix-broken install 
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt --fix-broken install 
 RUN apt-get install -y qgis-server python-qgis-common python-qgis apache2 libapache2-mod-fcgid unzip --force-yes
 #Install wfsOutputExtension plugin
 RUN mkdir -p /opt/qgis-server && mkdir -p /opt/qgis-server/plugins
