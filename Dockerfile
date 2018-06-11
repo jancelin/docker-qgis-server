@@ -21,8 +21,8 @@ RUN unzip /opt/qgis-server/plugins/master.zip -d /opt/qgis-server/plugins/
 RUN mv /opt/qgis-server/plugins/qgis-wfsOutputExtension-master /opt/qgis-server/plugins/wfsOutputExtension
 #xvfb
 ADD xvfb /etc/init.d/xvfb
-chmod +x /etc/init.d/xvfb
-update-rc.d xvfb defaults
+RUN chmod +x /etc/init.d/xvfb
+RUN update-rc.d xvfb defaults
 #virtual host
 ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
 #Setting up Apache
