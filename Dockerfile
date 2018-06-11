@@ -13,7 +13,7 @@ RUN gpg --export --armor 073D307A618E5811 | apt-key add -
 RUN apt-get -y update
 #--------------------------------------------------------------------------------------------
 # Install stuff
-RUN apt-get install -y qgis-server python-qgis apache2 libapache2-mod-fcgid unzip --force-yes
+RUN apt-get install -y qgis-server python-qgis apache2 libapache2-mod-fcgid unzip xvfb --force-yes
 #Install wfsOutputExtension plugin
 RUN mkdir -p /opt/qgis-server && mkdir -p /opt/qgis-server/plugins
 ADD https://github.com/3liz/qgis-wfsOutputExtension/archive/master.zip /opt/qgis-server/plugins
