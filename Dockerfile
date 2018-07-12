@@ -31,7 +31,6 @@ RUN export LC_ALL="C" && a2enmod fcgid && a2enconf serve-cgi-bin
 RUN a2dissite 000-default
 RUN a2ensite 001-qgis-server
 EXPOSE 80
-RUN start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1024x768x24 -ac +extension GLX +render -noreset
 ADD start.sh /start.sh
 RUN chmod +x /start.sh
 CMD /start.sh
