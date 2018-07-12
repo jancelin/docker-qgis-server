@@ -19,8 +19,9 @@ RUN mkdir -p /opt/qgis-server && mkdir -p /opt/qgis-server/plugins
 ADD https://github.com/3liz/qgis-wfsOutputExtension/archive/master.zip /opt/qgis-server/plugins
 RUN unzip /opt/qgis-server/plugins/master.zip -d /opt/qgis-server/plugins/
 RUN mv /opt/qgis-server/plugins/qgis-wfsOutputExtension-master /opt/qgis-server/plugins/wfsOutputExtension
-#xvfb print pdf
-ADD xvfb.service /etc/init.d/xvfb.service
+#xvfb print
+ADD xvfb /etc/init.d/xvfb
+ADD fcgid.conf /etc/apache2/mods-enabled/fcgid.conf
 RUN chmod +x /etc/init.d/xvfb.service
 RUN update-rc.d xvfb.service defaults
 #virtual host
