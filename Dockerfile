@@ -22,8 +22,8 @@ RUN mv /opt/qgis-server/plugins/qgis-wfsOutputExtension-master /opt/qgis-server/
 #xvfb print
 ADD xvfb /etc/init.d/xvfb
 ADD fcgid.conf /etc/apache2/mods-enabled/fcgid.conf
-RUN chmod +x /etc/init.d/xvfb.service
-RUN update-rc.d xvfb.service defaults
+RUN chmod +x /etc/init.d/xvfb
+RUN update-rc.d xvfb defaults
 #virtual host
 ADD 001-qgis-server.conf /etc/apache2/sites-available/001-qgis-server.conf
 #Setting up Apache
