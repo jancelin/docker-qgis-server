@@ -10,7 +10,7 @@ services:
   lb:
     image: dockercloud/haproxy
     links:
-      - qgiserver
+      - qgisserver
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
@@ -18,7 +18,7 @@ services:
     ports:
       - 8900:80
       
-  qgiserver:
+  qgisserver:
     image: jancelin/qgis-server:2.14LTR
     restart: always
     volumes:
@@ -36,7 +36,7 @@ docker-compose up -d lb
 * scale (ex:15 qgis-sever)
 
 ```
-docker-compose scale qgiserver=15
+docker-compose scale qgisserver=15
 ```
 
 * Test if qgis-server working
